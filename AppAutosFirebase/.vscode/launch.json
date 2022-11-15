@@ -1,0 +1,25 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "appautosfirebase",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--no-sound-null-safety"
+               ]
+        },
+        {
+            "name": "appautosfirebase (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "appautosfirebase (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}

@@ -1,0 +1,16 @@
+{
+
+  "color": "Verde",
+  "marca": "Toyota",
+  "matricula": "986-KOSC",
+  "modelo": "TO-98XCS",
+  "precio": "92000"
+},
+
+{
+  "color": "Rojo",
+  "marca": "Nissan",
+  "matricula": "78456-ADLOK",
+  "modelo": "NI-1923",
+  "precio": "120000"
+}
