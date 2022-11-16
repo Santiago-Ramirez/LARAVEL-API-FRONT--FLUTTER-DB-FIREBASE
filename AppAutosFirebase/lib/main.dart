@@ -1,8 +1,10 @@
 import 'package:appautosfirebase/models/Auto.dart';
 import 'package:appautosfirebase/services/autos_service.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter/cupertino.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:vm_service/vm_service.dart';
 
 class Data {
   int data = 0;
@@ -218,6 +220,12 @@ class _EditarAutoState extends State<EditarAuto> {
                     )),
                 ElevatedButton(
                   onPressed: () => {
+                    Alert(
+                      context: context,
+                      title: "Auto editado con exito",
+                      desc:
+                          "El auto ha sido editado con exito sin ningun error.",
+                    ).show(),
                     FutureBuilder<http.Response>(
                         future: EditarAutoApi(
                             widget.data.data.toString(),
@@ -227,15 +235,6 @@ class _EditarAutoState extends State<EditarAuto> {
                             int.parse(precioController.text),
                             matriculaController.text),
                         builder: ((context, snapshot) {
-                          if (snapshot.hasData) {
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(const SnackBar(
-                              content: Text("Exito al editar la informacion"),
-                            ));
-                          } else if (snapshot.hasError) {
-                            return Text('${snapshot.error}');
-                          }
-
                           return const CircularProgressIndicator();
                         }))
                   },
@@ -322,6 +321,12 @@ class _CrearAutoState extends State<crearAuto> {
                     )),
                 ElevatedButton(
                   onPressed: () => {
+                    Alert(
+                      context: context,
+                      title: "Auto creado con exito",
+                      desc:
+                          "El auto ha sido creado sin exito sin ningun error.",
+                    ).show(),
                     FutureBuilder<http.Response>(
                         future: createAuto(
                             marcaController.text,
@@ -330,20 +335,6 @@ class _CrearAutoState extends State<crearAuto> {
                             int.parse(precioController.text),
                             matriculaController.text),
                         builder: ((context, snapshot) {
-                          if (snapshot.hasData) {
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  title: new Text("Alert!!"),
-                                  content: new Text("You are awesome!"),
-                                );
-                              },
-                            );
-                          } else if (snapshot.hasError) {
-                            return Text('${snapshot.error}');
-                          }
-
                           return const CircularProgressIndicator();
                         }))
                   },
@@ -386,23 +377,15 @@ class EliminarAuto extends StatelessWidget {
                           "Color: ${snapshot.data?[index].color}, Precio: \$${snapshot.data?[index].precio}"),
                       trailing: Icon(Icons.delete),
                       onTap: () {
+                        Alert(
+                          context: context,
+                          title: "Auto eliminado con exito",
+                          desc:
+                              "El auto ha sido eliminado con exito sin ningun error.",
+                        ).show();
                         FutureBuilder<http.Response>(
                             future: eliminarAuto(idx.toString()),
                             builder: ((context, snapshot) {
-                              if (snapshot.hasData) {
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      title: new Text("Alert!!"),
-                                      content: new Text("You are awesome!"),
-                                    );
-                                  },
-                                );
-                              } else if (snapshot.hasError) {
-                                return Text('${snapshot.error}');
-                              }
-
                               return const CircularProgressIndicator();
                             }));
                       },
