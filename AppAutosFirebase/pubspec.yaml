@@ -39,6 +39,7 @@ dependencies:
   get: ^4.6.5
   vm_service: ^9.4.0
   http: any
+  ff_navigation_bar_lts: ^0.1.6
 
 dev_dependencies:
   flutter_test:

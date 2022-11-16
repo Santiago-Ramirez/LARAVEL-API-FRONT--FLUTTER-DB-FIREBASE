@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'App de autos'),
+      home: const MyStatefulWidget(),
     );
   }
 }
@@ -414,6 +414,66 @@ class EliminarAuto extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
         },
+      ),
+    );
+  }
+}
+
+class MyStatefulWidget extends StatefulWidget {
+  const MyStatefulWidget({super.key});
+
+  @override
+  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
+}
+
+class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+  int _selectedIndex = 0;
+  // ignore: prefer_final_fields
+  static List<Widget> _widgetOptions = <Widget>[
+    // ignore: prefer_const_constructors
+    const VerAutos(),
+    // ignore: prefer_const_constructors
+    const crearAuto(),
+    // ignore: prefer_const_constructors
+    const EliminarAuto(),
+    // ignore: prefer_const_constructors
+    // const FormAutomoviles(),
+    // const FormClientes()
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.remove_red_eye_outlined),
+            label: 'Ver autos',
+            backgroundColor: Colors.red,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add_to_photos_sharp),
+            label: 'Agregar carros',
+            backgroundColor: Colors.purple,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.car_rental),
+            label: 'Eliminar carros',
+            backgroundColor: Colors.pink,
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Color.fromARGB(255, 94, 187, 248),
+        onTap: _onItemTapped,
       ),
     );
   }
